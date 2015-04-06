@@ -4,7 +4,6 @@
  * @description :: Server-side logic for managing bpm/engines
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-
 module.exports = {
 
 
@@ -13,18 +12,28 @@ module.exports = {
    * `Bpm/engineController.run()`
    */
   run: function(req, res, next) {
-    var tokens;
-    Token.find().limit(1).exec(
-      function(err, result) {
-        tokens = result;
+    //---load case_data
+    // Case.findOne({
+    //       'idwf': req.param('idwf'),
+    //       'id': req.param('idcase')
+    //     }
+
+    //   )
+    Case.find(
+      {
+          'idwf':'fondyfpp',
+          // 'id':'AOKI'
+        })
+    .limit(1)
+      .exec(function(err, result) {
+        console.log('err',err,result);
+        if(!err){
+        //var thisCase = result.toJSON();
+        //console.log(thisCase);
+        return res.json(result.pop().toJSON());
+        }
       });
-    console.log(tokens.pop().toJSON());
-    sails.log(typeof(rs));
-    //({'idwf':'FONDYFPP'}).toJSON());
-    return res.json({
-      params: req.params,
-      msg: "hi=hola"
-    });
+
   },
 
 
