@@ -6,7 +6,8 @@
 */
 
 module.exports = {
-
+  connection: 'dna3',
+  tableName: 'tokens',
   attributes: {
 
   }
